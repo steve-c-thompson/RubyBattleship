@@ -5,26 +5,30 @@ require 'minitest/autorun'
 require 'minitest/pride'
 
 class ShipTest < MiniTest::Test
-  def test_new_ship_with_array_spaces_creates_internal_array_of_board_spaces
-    ship = Ship.new(["A1", "A2"])
+  def test_new_ship_with_board_spaces_sets_each_to_state_S
+    board_spaces = [BoardSpace.new("A1", "E"), BoardSpace.new("A2", "E")]
+    ship = Ship.new(board_spaces)
     arr = ship.spaces
     assert_equal(2, arr.length)
-    counter = 1
-    arr.each do |i|
-      assert_equal(BoardSpace.new("A" + counter.to_s , "S"), i)
-      counter += 1
+    assert_equal(board_spaces.length, arr.length)
+
+    board_spaces.length.times do |i|
+      assert_equal(board_spaces[i], arr[i])
     end
+    assert_equal("S", board_spaces[0].state)
   end
 
   def test_hit_space_sets_space_to_hit
-    ship = Ship.new(["A1", "A2"])
+    board_spaces = [BoardSpace.new("A1", "E"), BoardSpace.new("A2", "E")]
+    ship = Ship.new(board_spaces)
     ship.hit_space("A2")
     arr = ship.spaces
     assert_equal(arr[1].state, "H")
   end
 
-  def test_is_sunk_returns_true_for_all_spaces_hit
-    ship = Ship.new(["A1", "A2"])
+  def test_is_sunk_returns_true_for_all_spaces_H
+    board_spaces = [BoardSpace.new("A1", "E"), BoardSpace.new("A2", "E")]
+    ship = Ship.new(board_spaces)
     # hit twice
     ship.hit_space("A2")
     ship.hit_space("A1")
@@ -32,8 +36,8 @@ class ShipTest < MiniTest::Test
   end
 
   def test_is_sunk_returns_false_for_one_space_empty
-    ship = Ship.new(["A1", "A2"])
-    ship = Ship.new(["A1", "A2"])
+    board_spaces = [BoardSpace.new("A1", "E"), BoardSpace.new("A2", "E")]
+    ship = Ship.new(board_spaces)
     # hit once
     ship.hit_space("A2")
     refute(ship.is_sunk)
