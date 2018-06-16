@@ -7,7 +7,7 @@ class Board
     start_char = "A"
     size.times do |i|
       arr = []
-      size.times { |j| arr.push(BoardSpace.new(start_char + (j+1).to_s, :E ) ) }
+      size.times { |j| arr.push(BoardSpace.new(start_char + (j+1).to_s, BoardState::E ) ) }
       @board_spaces[start_char] = arr
       start_char.succ!
     end
@@ -71,7 +71,7 @@ class Board
     if (row_data != nil)
       row_data.each do |space|
         if space.position == start
-          if(space.state != :E)
+          if(space.state != BoardState::E)
             return true
           else
             break
