@@ -13,8 +13,13 @@ class Board
     end
   end
 
-  def add_ship(ship)
+  def add_ship(ship, position_array)
 
+
+  end
+
+  def fire_at_position(pos)
+    false
   end
 
   def is_valid_position?(ship_position_array)
