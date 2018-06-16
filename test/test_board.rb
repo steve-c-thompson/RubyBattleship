@@ -1,5 +1,6 @@
 require './lib/board'
 require './lib/board_space'
+require './lib/ship_state'
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
@@ -17,7 +18,7 @@ class BoardTests < MiniTest::Test
       counter = 1
       val.each do |v|
         assert_equal( start + counter.to_s, v.position)
-        assert_equal(:E, v.state)
+        assert_equal(BoardState::E, v.state)
         counter += 1
       end
       start.succ!
@@ -36,7 +37,7 @@ class BoardTests < MiniTest::Test
       counter = 1
       val.each do |v|
         assert_equal( start + counter.to_s, v.position)
-        assert_equal(:E, v.state)
+        assert_equal(BoardState::E, v.state)
         counter += 1
       end
       start.succ!
@@ -89,28 +90,28 @@ class BoardTests < MiniTest::Test
   def test_is_valid_position_returns_false_for_spot_already_taken_vertical
     board = Board.new(4)
     board_spaces = board.board_spaces
-    board_spaces["B"][0].state = :S
+    board_spaces["B"][0].state = BoardState::S
     refute(board.is_valid_position?(["A1", "B1"]))
-    board_spaces["B"][0].state = :E
+    board_spaces["B"][0].state = BoardState::E
 
-    board_spaces["A"][0].state = :H
+    board_spaces["A"][0].state = BoardState::H
     refute(board.is_valid_position?(["A1", "B1"]))
 
-    board_spaces["A"][0].state = :M
+    board_spaces["A"][0].state = BoardState::M
     refute(board.is_valid_position?(["A1", "B1"]))
   end
 
   def test_is_valid_position_returns_false_for_spot_already_taken_horizontal
     board = Board.new(4)
     board_spaces = board.board_spaces
-    board_spaces["A"][0].state = :S
+    board_spaces["A"][0].state = BoardState::S
     refute(board.is_valid_position?(["A1", "A2"]))
-    board_spaces["A"][0].state = :E
+    board_spaces["A"][0].state = BoardState::E
 
-    board_spaces["A"][1].state = :H
+    board_spaces["A"][1].state = BoardState::H
     refute(board.is_valid_position?(["A1", "A2"]))
 
-    board_spaces["A"][1].state = :M
+    board_spaces["A"][1].state = BoardState::M
     refute(board.is_valid_position?(["A1", "A2"]))
   end
 
