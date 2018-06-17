@@ -115,4 +115,28 @@ class BoardTests < MiniTest::Test
     refute(board.is_valid_position?(["A1", "A2"]))
   end
 
+  def test_add_ship_adds_board_spaces_to_ship
+
+  end
+
+  def test_fire_at_position_returns_false_for_invalid_move
+    board = Board.new(4)
+    refute(board.fire_at_position("E1"))
+    refute(board.fire_at_position("A5"))
+  end
+
+  def test_fire_at_position_returns_true_for_valid_move
+    board = Board.new(4)
+    assert(board.fire_at_position("A1"))
+    assert(board.fire_at_position("D4"))
+  end
+
+  def test_fire_at_position_changes_board_state_to_hit_when_ship_present
+
+  end
+
+  def test_fire_at_position_changes_board_state_to_miss_when_ship_not_present
+
+  end
+
 end
