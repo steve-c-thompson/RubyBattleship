@@ -98,12 +98,4 @@ class Board
 
     false
   end
-
-  def display_obfuscated
-
-  end
-
-  def display_all
-
-  end
 end
