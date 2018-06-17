@@ -11,15 +11,8 @@ class Board
       @board_spaces[start_char] = arr
       start_char.succ!
     end
-  end
 
-  def add_ship(ship, position_array)
-
-
-  end
-
-  def fire_at_position(pos)
-    false
+    @ships = []
   end
 
   def is_valid_position?(ship_position_array)
@@ -93,6 +86,17 @@ class Board
 
   def in_col_range?(col)
     col >= 1 && col <= @board_spaces.size
+  end
+
+  def add_ship(ship, position_array)
+
+    # false if ship cannot be placed
+  end
+
+  # check if position is valid and return true
+  def fire_at_position(pos)
+
+    false
   end
 
   def display_obfuscated
